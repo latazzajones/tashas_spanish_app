@@ -1,0 +1,11 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: tashas_spanish_app_development
+  pool: 5
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: tashas_spanish_app_test
+  pool: 5
