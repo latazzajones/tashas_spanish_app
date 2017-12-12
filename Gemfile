@@ -9,6 +9,7 @@ end
 
 gem 'rails', github: "rails/rails"
 
+gem 'faraday'
 gem 'pg'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'

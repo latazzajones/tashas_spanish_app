@@ -1,36 +1,27 @@
 class Spanglish::DailyWord 
 
-  def self.get
-    self.new.get
-  end
-
   def initialize
   end
 
   def get
-    response = https.request(request)
+    connection = Faraday.new(url: uri, headers: headers)
+
+    response = connection.get
+    binding.pry
+
     response.body
   end
 
   private
 
-  def request
-    req = Net::HTTP::Get.new(uri.path)
-    req['app_id'] = ENV['oxford_dictionary_app_id']
-    req['app_key'] = ENV['oxford_dictionary_app_key']
-
-    req
-  end
-
-  def https
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-
-    http
+  def headers
+    { 'app_id' => ENV['oxford_dictionary_app_id'], 
+      'app_key' => ENV['oxford_dictionary_app_key'] }
   end
 
   def uri
-    URI.parse "https://od-api.oxforddictionaries.com/api/v1/#{query}"
+    #TODO concatinate!
+    "https://od-api.oxfordictionaries.com/api/v1/wordlist/en/lexicalCategory%3Dnoun?limit=1&offset=300"
   end
 
   def query
@@ -38,7 +29,7 @@ class Spanglish::DailyWord
   end
 
   def offset
-    rand(0...3000)
+    rand(0..3)
   end
 
   def filters_basic
