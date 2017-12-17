@@ -12,6 +12,7 @@ class Spanglish::DailyWord
   private
 
   def translation
+    #maybe we should return more than one english word incase ... 
     @translation ||= Faraday.new(url: spanish_translation_uri(english_word), 
                                  headers: headers)
   end
@@ -49,12 +50,12 @@ class Spanglish::DailyWord
   end
 
   def offset
-    #figure out offset :-( 
-    rand(0..15)
+    #the offset has to be mapped to the filter_basic :-/ 
+    rand(0..158518)
   end
 
   def filters_basic
-    %w(adjective adverb conjunction idiomatic interjection noun numeral other preposition pronoun suffix verb).sample
+    %w(adjective adverb interjection noun other preposition pronoun verb).sample
   end
 
 end 
